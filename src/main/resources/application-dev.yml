@@ -1,0 +1,8 @@
+spring:
+    application:
+        name: "stash-o"
+    datasource:
+        driver-class-name: "org.postgresql.Driver"
+        url: "dbc:postgresql://localhost:1440"
+    server:
+        port: 5432

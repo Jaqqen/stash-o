@@ -1,4 +1,4 @@
-package com.jaqqen.stasho;
+package org.jaqqen.stasho;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
