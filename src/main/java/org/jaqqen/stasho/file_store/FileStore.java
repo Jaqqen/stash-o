@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 
 @Data
 @NoArgsConstructor
@@ -26,5 +27,13 @@ public class FileStore implements Serializable {
     public FileStore(Long id, Byte[] fileBytes) {
         this.id = id;
         this.fileBytes = fileBytes;
+    }
+
+    @Override
+    public String toString() {
+        return "FileStore{" +
+            "id=" + id +
+            ", fileBytes=" + Arrays.toString(fileBytes) +
+            '}';
     }
 }

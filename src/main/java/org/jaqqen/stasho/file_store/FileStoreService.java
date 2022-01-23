@@ -13,4 +13,12 @@ public class FileStoreService {
     public List<FileStore> getFileStores() {
         return fileStoreRepository.findAll();
     }
+
+    public void save(FileStore fileStore) {
+        fileStoreRepository.saveAndFlush(fileStore);
+    }
+
+    public FileStore getFileStoreForId(Long id) {
+        return fileStoreRepository.findById(id).orElse(null);
+    }
 }
