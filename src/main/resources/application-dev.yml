@@ -3,6 +3,11 @@ spring:
         name: "stash-o"
     datasource:
         driver-class-name: "org.postgresql.Driver"
-        url: "dbc:postgresql://localhost:1440"
+        url: jdbc:postgresql://localhost:1440/postgres
+        username: postgres
+        password: sto_2021*po-1
+    devtools:
+        restart:
+            quiet-period: 900
     server:
         port: 5432

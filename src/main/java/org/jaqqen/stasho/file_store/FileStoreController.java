@@ -1,14 +1,13 @@
 package org.jaqqen.stasho.file_store;
 
-import org.hibernate.internal.build.AllowSysOut;
-import org.jaqqen.stasho.file_store.FileStore;
-import org.jaqqen.stasho.file_store.FileStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,19 +16,31 @@ public class FileStoreController {
     @Autowired
     private FileStoreService fileStoreService;
 
+    @Value("${my.test.property:#{null}}")
+    private String testVar;
+
     @GetMapping("all")
     public List<FileStore> getFileStores() {
+        System.out.println(">>> MY TEST PROPERTY IS: " + testVar);
         return fileStoreService.getFileStores();
     }
 
-   @GetMapping("{id}")
-   public FileStore getFileStore(@PathVariable("id") Long id) {
+    @GetMapping("{id}")
+    public FileStore getFileStore(@PathVariable("id") Long id) {
         return fileStoreService.getFileStoreForId(id);
-   }
+    }
 
-   @PostMapping(path = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
-   public void saveFileStore(@RequestBody FileStore fileStore) {
-        System.out.println(fileStore);
-        fileStoreService.save(fileStore);
-   }
+    @PostMapping(path = "", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<String> saveFileStore(
+        @RequestPart("file_data") MultipartFile multipartFile
+    ) {
+        try {
+            fileStoreService.saveAndFlush(multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to save file: Couldn't extract bytes from file");
+        }
+
+        return ResponseEntity.ok().body("Successfully saved");
+    }
 }

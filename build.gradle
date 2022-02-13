@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools:2.6.2'
     implementation 'org.springframework.kafka:spring-kafka:2.7.6'
     implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     developmentOnly 'org.springframework.boot:spring-boot-devtools:2.6.1'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus:1.8.1'
     runtimeOnly 'org.postgresql:postgresql:42.3.1'
