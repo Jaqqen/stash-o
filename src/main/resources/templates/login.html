@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+    <head>
+        <title tiles:fragment="title">Login page</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+              crossorigin="anonymous">
+        <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+        <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" >
+    </head>
+    <body>
+        <div tiles:fragment="content" >
+            <form name="f" th:action="@{/login}" method="post" class="form-signin">
+                <fieldset>
+                    <legend class="form-signin-heading loginLegend">Login to stash-o</legend>
+                    <div th:if="${param.error}" class="alert alert-error">
+                        Invalid username and password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        You have been logged out.
+                    </div>
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control"/>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control"/>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

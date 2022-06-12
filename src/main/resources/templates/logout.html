@@ -1,0 +1,15 @@
+<body th:onload="logoutFunction()">
+    <form th:action="@{/logout}" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <button th:id="${@templateController.getLogoutId()}" type="submit">Logout</button>
+    </form>
+    <script th:inline="javascript">
+        const logoutFunction = () => {
+            /*<![CDATA[*/
+                const logoutVar = /*[[${@templateController.getLogoutId()}]]*/ 'defaultVar';
+                const submitButton = document.getElementById(logoutVar);
+                submitButton.click();
+            /*]]>*/
+        };
+    </script>
+</body>
